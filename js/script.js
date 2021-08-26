@@ -58,7 +58,7 @@ const todoView = {
         this.renderTemplate(todoItemObject);
     },
     onLoadFunc() {
-        todoController.getData().forEach(item => this.renderTemplate(item))
+        if (todoController.getData()) todoController.getData().forEach(item => this.renderTemplate(item))
     },
     createTemplate(title = '', description = '') {
         const mainDiv = document.createElement('div');
