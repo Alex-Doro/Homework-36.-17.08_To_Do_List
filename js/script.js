@@ -1,7 +1,6 @@
 'use strict'
 const DB_NAME = 'todoList_data';
 
-// creates a To Do Item on submit
 document.querySelector('#todoForm').addEventListener('submit', event => {
     event.preventDefault();
 
@@ -17,14 +16,12 @@ document.querySelector('#todoForm').addEventListener('submit', event => {
     renderTemplate(dataItem);
 });
 
-// Page reload renders all TO DO List from Local Storage data
 window.addEventListener('load', () => {
     if (!localStorage[DB_NAME]) return;
     const data = JSON.parse(localStorage.todoList_data);
     data.forEach(item => renderTemplate(item));
 })
 
-// save input Data to Local Storage
 function saveData(dataItem) {
     if (localStorage[DB_NAME]) {
         const data = JSON.parse(localStorage[DB_NAME]);
@@ -36,30 +33,28 @@ function saveData(dataItem) {
     localStorage.setItem(DB_NAME, JSON.stringify([dataItem]))
 };
 
-// add To Do items to DOM and display to user
 function renderTemplate({title, description}) {
     const template = createTemplate(title, description);
     document.querySelector('#todoItems').prepend(template);
 };
 
-// pre-build a To Do Item structure before rendering
 function createTemplate(title = '', description = '') {
     let mainDiv = document.createElement('div');
+    mainDiv.className = 'col-4';
+    
     let wrapperDiv = document.createElement('div');
-    let headerDiv = document.createElement('div');
-    let descDiv = document.createElement('div');
-
-    mainDiv.setAttribute('class', 'col-4');
-    wrapperDiv.setAttribute('class', 'taskWrapper');
-    headerDiv.setAttribute('class', 'taskHeading');
-    descDiv.setAttribute('class', 'taskDescription');
-
-    headerDiv.innerHTML = title;
-    descDiv.innerHTML = description;
-
+    wrapperDiv.className = 'taskWrapper';
     mainDiv.append(wrapperDiv);
+
+    let headerDiv = document.createElement('div');
+    headerDiv.className = 'taskHeading';
     wrapperDiv.append(headerDiv);
-    wrapperDiv.append(descDiv);
+    headerDiv.innerHTML = title;
+
+    let descDiv = document.createElement('div');
+    descDiv.className = 'taskDescription';
+    wrapperDiv.append(descDiv);    
+    descDiv.innerHTML = description;
 
     return mainDiv;
 };
