@@ -1,17 +1,36 @@
+body {
+    background-image: linear-gradient(120deg, #f6d365, #fda085);
+    min-height: 100vh;
+}
+
 .taskWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     background-color: rgb(170, 228, 255);
     border-radius: 10px;
     box-shadow: 0 0 14px 1px rgba(0, 0, 0, .2);
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 20px;
 }
 
 .taskHeading {
     font-size: 20px;
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .taskDescription {
     font-size: 16px;
+}
 
+input[type=checkbox] {
+    padding: 10px;
+    align-self: flex-end;
+}
+
+.todo-close-btn {
+    position: absolute;
+    right: 13px;
+    top: 13px;
 }
