@@ -51,11 +51,12 @@ const todoView = {
     form: document.querySelector('#todoForm'),
     todoItems: document.querySelector('#todoItems'),
     clearAllBtn: document.querySelector('#todo-btn-clearAll'),
+    deleteTodoItemBtn: document.querySelector('.todo-close-btn'),
     setEvents() {
         window.addEventListener('load', this.onLoadFunc.bind(this));
         this.form.addEventListener('submit', this.formSubmit.bind(this));
-        this.clearAllBtn.addEventListener('mouseup', this.clearAllData.bind(this))
-        // this.todoItems.addEventListener('change', this.todoItemCompleted.bind(this));
+        this.clearAllBtn.addEventListener('mouseup', this.clearAllData.bind(this));
+        this.todoItems.addEventListener('mouseup', this.deleteTodoItem.bind(this));
     },
     formSubmit(e) {
         e.preventDefault();
@@ -110,12 +111,13 @@ const todoView = {
     },
     clearAllData() {
         todoController.clearAllData();
-        window.location.reload();
-        return false
+        location.reload();
+    },
+    deleteTodoItem({target}) {
+        if (target.className.includes('todo-close-btn')) {
+            target.parentElement.parentElement.remove();
+        }
     }
-    // todoItemCompleted(e) {
-    //     return e.target.checked;
-    // },
 };
 
 todoView.setEvents();
