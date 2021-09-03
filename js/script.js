@@ -23,6 +23,12 @@ const todoController = {
     },
     clearAllData() {
         todoModel.clearAllData();
+    },
+    removeTodoItem(index) {
+        const data = this.getData();
+        let itemIndex = data.length - 1 - index
+        data.splice(itemIndex, 1);
+        localStorage.setItem('todoList_data', JSON.stringify(data))
     }
 };
 
@@ -44,7 +50,10 @@ const todoModel = {
     },
     clearAllData() {
         localStorage.removeItem(this.dbName)
-    }
+    },
+    // removeTodoItem(index) {
+
+    // }
 };
 
 const todoView = {
@@ -107,15 +116,20 @@ const todoView = {
     },
     renderTemplate({title, description}) {
         const template = this.createTemplate(title, description);
-        document.querySelector('#todoItems').prepend(template);
+        this.todoItems.prepend(template);
     },
     clearAllData() {
         todoController.clearAllData();
         location.reload();
     },
     deleteTodoItem({target}) {
+        const child = target.parentNode.parentNode
+        const parent = target.parentNode.parentNode.parentNode;
+        let index = Array.from(parent.children).indexOf(child);
+
         if (target.className.includes('todo-close-btn')) {
             target.parentElement.parentElement.remove();
+            todoController.removeTodoItem(index);
         }
     }
 };
