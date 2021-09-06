@@ -36,6 +36,7 @@ const todoController = {
 
     //     data.splice(itemIndex, 1);
     //     todoModel.setData(data);
+    //     if (!this.getData().length) this.clearAllData();
     // },
     removeTodoItem(id) {
         const data = this.getData();
