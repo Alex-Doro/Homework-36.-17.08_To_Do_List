@@ -157,7 +157,10 @@ const todoView = {
     },
     clearAllData() {
         todoController.clearAllData();
-        location.reload();
+        
+        while (this.todoItems.firstElementChild) {
+            this.todoItems.removeChild(this.todoItems.firstChild)
+        }
     },
     //Сначала решил удаление одного todoItem путем поиска его индекса в DOM дереве, работало нормально) ниже рабочий вариант через id
     // deleteTodoItem({target}) {
